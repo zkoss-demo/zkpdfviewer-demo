@@ -1,0 +1,36 @@
+<zk>
+    <window title="Sign a Document" width="500px" position="top,center" closable="true"
+        apply="zk.demo.SignatureComposer">
+        <vlayout>
+            <grid>
+                <columns>
+                    <column width="120px"/>
+                    <column />
+                </columns>
+                <rows>
+                    <row>
+                        <label value="Name" />
+                        <label value="${arg.fileName}" />
+                    </row>
+                    <row>
+                        <label value="Timestamp" />
+                        <label value="${arg.timestamp}" />
+                    </row>
+                    <row spans="2">
+                        <vlayout>
+                            Please sign here
+                            <signature id="sig" hflex="1" height="150px"
+                                penColor="blue" toolbarVisible="false" />
+                            <button id="btnClear" iconSclass="z-icon-trash" label="Clear"
+                                style="float: right" />
+                        </vlayout>
+                    </row>
+                </rows>
+            </grid>
+            <hlayout>
+                <button hflex="1" id="btnSave" label="Save" iconSclass="z-icon-save"/>
+                <button hflex="1" id="btnCancel" label="Cancel" iconSclass="z-icon-close"/>
+            </hlayout>
+        </vlayout>
+    </window>
+</zk>

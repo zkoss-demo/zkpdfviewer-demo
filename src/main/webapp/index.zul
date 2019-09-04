@@ -1,0 +1,77 @@
+<?page title="ZK Document Platform"?>
+<zk>
+	<style><![CDATA[
+	.preview {
+		position: absolute;
+		right: 50px;
+		bottom: 50px;
+		opacity: 0.5;
+	}
+	]]>
+	</style>
+	<borderlayout width="100%" height="100%"
+			viewModel="@id('vm') @init('zk.demo.PdfViewerDemoVM')">
+		<north height="min">
+			Welcome, admin.
+		</north>
+		<west width="350px" splittable="true">
+			<tree hflex="1" vflex="1" model="@init(vm.fileTreeModel)"
+					onSelect="@command('openPdfFile', file=event.reference.label)">
+				<template name="model">
+					<treeitem>
+						<treerow>
+							<treecell
+								iconSclass="${each.data.iconSclass}"
+								label="${each.data.label}"/>
+						</treerow>
+					</treeitem>
+				</template>
+			</tree>
+		</west>
+		<center>
+			<tabbox hflex="1" vflex="1" model="@load(vm.openFileModel)">
+				<template name="model:tab">
+					<tab iconSclass="z-icon-file-pdf-o" label="${each}" closable="true"
+						onClose="@command('closePdfFile', file=self.label)" />
+				</template>
+				<template name="model:tabpanel">
+					<tabpanel>
+						<pdfviewer src="pdfs/${each}" hflex="1" vflex="1">
+							<custom-attributes pv="${self}"/>
+							<toolbar>
+								<toolbarbutton tooltiptext="First Page"
+										iconSclass="z-icon-2x z-icon-fw z-icon-angle-double-left"
+										onClick="pv.firstPage()"/>
+								<toolbarbutton tooltiptext="Previous Page"
+										iconSclass="z-icon-2x z-icon-fw z-icon-angle-left"
+										onClick="pv.previousPage()"/>
+								<toolbarbutton tooltiptext="Next Page"
+										iconSclass="z-icon-2x z-icon-fw z-icon-angle-right"
+										onClick="pv.nextPage()"/>
+								<toolbarbutton tooltiptext="Last Page"
+										iconSclass="z-icon-2x z-icon-fw z-icon-angle-double-right"
+										onClick="pv.lastPage()"/>
+								<toolbarbutton tooltiptext="Zoom in"
+										iconSclass="z-icon-2x z-icon-fw z-icon-search-plus"
+										onClick="pv.zoomIn()"/>
+								<toolbarbutton tooltiptext="Zoom out"
+										iconSclass="z-icon-2x z-icon-fw z-icon-search-minus"
+										onClick="pv.zoomOut()"/>
+								<toolbarbutton tooltiptext="Rotate clockwise"
+										iconSclass="z-icon-2x z-icon-fw z-icon-rotate-right"
+										onClick="pv.rotateClockwise()"/>
+								<toolbarbutton tooltiptext="Rotate counterclockwise"
+										iconSclass="z-icon-2x z-icon-fw z-icon-rotate-left"
+										onClick="pv.rotateCounterclockwise()"/>
+								<toolbarbutton tooltiptext="Add a signature"
+										iconSclass="z-icon-2x z-icon-fw z-icon-pencil"
+										onClick="@command('addSignature', file=each)"/>
+							</toolbar>
+						</pdfviewer>
+						<image sclass="preview" content="@load(vm.signatures[each])" />
+					</tabpanel>
+				</template>
+			</tabbox>
+		</center>
+	</borderlayout>
+</zk>
