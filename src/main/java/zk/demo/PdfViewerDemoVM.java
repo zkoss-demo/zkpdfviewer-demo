@@ -27,11 +27,12 @@ public class PdfViewerDemoVM {
 
     public PdfViewerDemoVM() {
         TreeNode<TreeData> root = treeNode("root",
-                treeNode("Products",
-                        treeNode("ZK 6 Essentials.pdf"),
-                        treeNode("ZK-quickstart-5.0.0-RC.pdf")),
+                treeNode("Recruit",
+                        treeNode("Resume.pdf")),
                 treeNode("Marketing",
-                        treeNode("case_study_layout.pdf"))
+                        treeNode("Catalogs.pdf")),
+                treeNode("Financial",
+                        treeNode("Bill.pdf"))
         );
         fileTreeModel = new DefaultTreeModel<>(root);
         openFileModel = new ListModelSet<>();
