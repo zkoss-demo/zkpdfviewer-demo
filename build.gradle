@@ -24,7 +24,6 @@ repositories {
 dependencies {
     compile "org.zkoss.zk:zul:${zkVersion}"
     compile "org.zkoss.zk:zkmax:${zkVersion}"
-    compile 'org.zkoss.addon:pdfviewer:0.8.0.FL.20190912-Eval'
 }
 
 gretty {
